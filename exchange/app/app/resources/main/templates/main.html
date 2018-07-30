@@ -7,14 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <meta name="description" content="Istmex Exchange">
     <meta name="author" content="Eduardo Perezk">
-    <link rel="shortcut icon" href={{url_for('main.static', filename='img/favicon.ico')}} type="image/x-icon">
+    <link rel="shortcut icon" href="{{url_for('main.static', filename='img/favicon.ico')}}" type="image/x-icon">
     <meta name="keyword" content="Exchange Dashboard">
     <title>Istmex Exchange</title>
     <!-- Icons-->
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-   <script src="https://code.highcharts.com/stock/highstock.js"></script>
-    <script src="https://code.highcharts.com/stock/modules/drag-panes.js"></script>
-  <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+    
+
 
     <link href="{{url_for('main.static', filename='node_modules/@coreui/icons/css/coreui-icons.min.css')}}" rel="stylesheet">
     <link href="{{url_for('main.static', filename='node_modules/flag-icon-css/css/flag-icon.min.css')}}" rel="stylesheet">
@@ -1337,7 +1335,7 @@
       </div>
     </footer>
     <!-- CoreUI and necessary plugins-->
-
+    <script src="{{url_for('main.static', filename='node_modules/jquery/dist/jquery.min.js')}}"></script>
     <script src="{{url_for('main.static', filename='node_modules/popper.js/dist/umd/popper.min.js')}}"></script>
     <script src="{{url_for('main.static', filename='node_modules/bootstrap/dist/js/bootstrap.min.js')}}"></script>
     <script src="{{url_for('main.static', filename='node_modules/pace-progress/pace.min.js')}}"></script>
@@ -1345,6 +1343,13 @@
     <script src="{{url_for('main.static', filename='node_modules/@coreui/coreui/dist/js/coreui.min.js')}}"></script>
     <script src="{{url_for('main.static', filename='node_modules/chart.js/dist/Chart.min.js')}}"></script>
     <script src="{{url_for('main.static', filename='node_modules/@coreui/coreui-plugin-chartjs-custom-tooltips/dist/js/custom-tooltips.min.js')}}"></script>
+
+
+    
+    <script src="{{url_for('main.static', filename='node_modules/highcharts/highstock.js')}}"></script>
+    <script src="{{url_for('main.static', filename='node_modules/highcharts/modules/drag-panes.js')}}"></script>
+    <script src="{{url_for('main.static', filename='node_modules/highcharts/modules/exporting.js')}}"></script>
+
     <!-- Plugins and scripts required by this view-->
 
     <script src="{{url_for('main.static', filename='js/main.js')}}"></script>

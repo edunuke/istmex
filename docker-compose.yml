@@ -40,7 +40,7 @@ services:
       - dbnet
 
   postgres:
-    build: postgres
+    image: postgres
     restart: always
     expose:
       - "5432"

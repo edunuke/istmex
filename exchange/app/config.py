@@ -44,6 +44,3 @@ MAIL_PASSWORD = None
 ADMINS = ['eduardo.denadai@gmail.com']
 
 DEBUG = False
-
-CELERY_BROKER_URL = 'redis://localhost:6379'
-CELERY_RESULT_BACKEND= 'redis://localhost:6379' 

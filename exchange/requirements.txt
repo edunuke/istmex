@@ -1,6 +1,3 @@
-# This file is used by pip to install required python packages
-# Usage: pip install -r requirements.txt
-
 # Flask Framework
 Flask
 
@@ -22,10 +19,12 @@ flask-socketio
 passlib==1.7.1
 sqlalchemy-migrate==0.11.0
 
-# exchanges
-gdax
-
-
 # server
 gunicorn
+
+#database
 psycopg2-binary
+
+
+#other
+requests
