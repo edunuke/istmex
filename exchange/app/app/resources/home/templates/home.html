@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href={{url_for('home.static', filename='img/favicon.ico')}} type="image/x-icon">
+
+    <title>Istmex Exchange</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{url_for('home.static', filename='node_modules/fontawesome/css/all.min.css')}}">
+	  <link rel="stylesheet" href="{{url_for('home.static', filename='node_modules/bootstrap/dist/css/bootstrap.min.css')}}">
+	  <link rel="stylesheet" href="{{url_for('home.static', filename='node_modules/animate-css/animate.min.css')}}">
+    <!-- Custom styles for this template -->
+	  <link href="{{url_for('home.static', filename='css/home.css')}}" rel="stylesheet">
+	  <link href="{{url_for('home.static', filename='css/loader.css')}}" rel="stylesheet">
+  </head>	
+
+  <body class="animated fadeIn">
+    <div class="background"></div>
+    <div id="loader-wrapper">
+        <div id="splash">
+          <div class="anim">
+            <div id="loader">
+                <i class="fas fa-chart-line fa-3x"></i>
+            </div>
+          </div>
+        </div>    
+    </div>
+    <div class="container">   
+      <div class="row">
+        <div class="col-md-8 center-block">
+          <div class="form">
+            <div class="title">
+              <p>ISTMEX EXCHANGE</p>    
+            </div>
+
+            <form class="register-form">
+              {{registrationForm.csrf_token}}
+              <fieldset class="forms_fieldset">
+                {{registrationForm.username(type="text", 
+                                            placeholder="Username",
+                                            autocomplete="on")}}   
+                {{registrationForm.email(type="email",
+                                          placeholder="email",
+                                          autocomplete="on")}}
+                {{registrationForm.password(type="password", 
+                                            placeholder="password",
+                                            autocomplete="off")}}
+                {{registrationForm.submit(class="forms_buttons-action")}}
+       
+                <div>
+                  {{registrationForm.accept_tos()}}
+                  <label for="register-accept_tos">I accept the <a href="#">terms of service</a></label>  
+                </div>
+
+              </fieldset>
+              <p class="message">Already registered? <a>Sign In</a></p>
+            </form>
+      
+      
+                  <form class="login-form">
+
+                    <fieldset class="forms_fieldset">
+                      {{loginForm.csrf_token}}
+                      {{loginForm.email(type="email",
+                                        placeholder="Email",
+                                        class="input-block-level",
+                                        autocomplete="on")}}
+                                        
+                      {{loginForm.password(type="password",
+                                           placeholder="Password",
+                                           class="input-block-level",
+                                           autocomplete="off")}}
+      
+                      {{loginForm.submit(class="btn-login")}}
+
+                      <div>
+                          {{loginForm.remember_me()}}
+                          <label for="login-remember_me">Remember Me</label>
+                          {{loginForm.do(value="login")}}
+                          
+                      </div>
+
+                  </fieldset>
+                    <p class="message">Not registered? <a>Create an account</a></p>
+                  </form>
+      
+      
+                </div>
+      
+              </div>
+            </div>
+      </div>
+
+
+
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->    
+    <script src="{{url_for('home.static', filename='node_modules/jquery/dist/jquery.min.js')}}"></script>
+    <script src="{{url_for('home.static', filename='node_modules/popper.js/dist/umd/popper.min.js')}}"></script>
+    <script src="{{url_for('home.static', filename='node_modules/bootstrap/dist/js/bootstrap.min.js')}}"></script>
+    <script src="{{url_for('home.static', filename='js/home.js')}}"></script>
+
+  </body>
+</html>
+
+

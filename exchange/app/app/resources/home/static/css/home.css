@@ -1,0 +1,161 @@
+
+/*LOGIN*/
+@import url(https://fonts.googleapis.com/css?family=Roboto:900);
+
+.background {
+  position: absolute;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, #ffeb3b, #ff9800);
+  border-style: none; 
+
+
+}
+.container {
+  z-index: 999;
+}
+
+.center-block {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+} 
+
+.form {
+  position: relative;
+  z-index: 1;
+  max-width: 550px;
+  margin: 0 auto 100px;
+  padding: 45px;
+  text-align: center;
+
+}
+.form input {
+  font-family: 'Roboto', sans-serif;
+  outline: 0;
+  background:transparent;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 25px;
+  border-bottom: 5px solid #2E4053;
+}
+.title{
+  margin-bottom: 15px;
+  color: #2E4053;
+  font-family: 'Roboto', sans-serif;
+  font-size: 40px;
+}
+.form input[type=submit] {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #68c39f;
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 25px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+.form button:hover,.form button:active,.form button:focus {
+  background: #68c39f;
+}
+.form .message {
+  margin: 15px 0 0;
+  color: #2E4053;
+  font-size: 20px;
+}
+.form .message a {
+  color: #007bff;
+  font-size: 25px;
+}
+.form .register-form {
+  display: none;
+}
+a {
+  cursor: pointer;
+  text-decoration: none;
+}
+.oops {
+  border-width:medium !important;
+  border-style: solid !important;
+  border-color: #E74C3C !important;
+}
+
+[type="checkbox"]:checked,
+[type="checkbox"]:not(:checked)
+{
+    position: absolute;
+    left: -9999px;
+}
+[type="checkbox"]:checked + label,
+[type="checkbox"]:not(:checked) + label
+{
+    position: relative;
+    padding-left: 28px;
+    cursor: pointer;
+    line-height: 20px;
+    display: inline-block;
+    color: #666;
+}
+[type="checkbox"]:checked + label:before,
+[type="checkbox"]:not(:checked) + label:before
+{
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #ddd;
+    background: #fff;
+}
+[type="checkbox"]:checked + label:after,
+[type="checkbox"]:not(:checked) + label:after
+{
+    content: '';
+    width: 7px;
+    height: 7px;
+    background: #2E4053;
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+[type="checkbox"]:not(:checked) + label:after
+{
+    opacity: 0;
+    -webkit-transform: scale(0);
+    -moz-transform: scale(0);
+    -o-transform: scale(0);
+    -ms-transform: scale(0);
+    transform: scale(0);
+}
+[type="checkbox"]:checked + label:after
+{
+    opacity: 1;
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -o-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+}
+[type="checkbox"]:disabled:checked + label:before,
+[type="checkbox"]:disabled:not(:checked) + label:before
+{
+    border-color: #ccc;
+    background-color: #eee;
+}
+[type="checkbox"]:disabled:checked + label:after
+{
+    background: #aaa;
+}

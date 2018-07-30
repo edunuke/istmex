@@ -1,0 +1,58 @@
+version: '3.5'
+
+services:
+  btc-api:
+    build: btcapi
+
+    expose:
+      - "8000"
+      - "9001"
+    ports:
+      - "8000:8000"
+      - "9001:9001"
+    networks:
+      - btcnet
+
+  btc-core:
+    build: btcservice
+    expose:
+      - "9001"
+      - "18443" 
+      - "18444" 
+      - "5000"
+    ports:
+      - "9002:9001"
+    networks:
+      - btcnet
+
+  exchange:
+    build: exchange
+    expose:
+      - "5000"
+      - "9001"
+      - "5432"
+      - "465"
+    ports:
+      - "8080:5000"
+      - "9003:9001"
+      - "465:465"
+    networks:
+      - dbnet
+
+  postgres:
+    build: postgres
+    restart: always
+    expose:
+      - "5432"
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD:test
+    networks:
+      - dbnet
+
+networks:
+  btcnet:
+    name: btcnet
+  dbnet:
+    name: dbnet

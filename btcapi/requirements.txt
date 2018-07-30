@@ -1,0 +1,5 @@
+falcon
+simplejson
+python-bitcoinrpc
+gunicorn
+pycrypto
