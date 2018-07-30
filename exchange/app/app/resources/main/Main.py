@@ -13,8 +13,7 @@ class MainView(MethodView):
 		
 		else:
 
-			return render_template('main.html',
-								   userdata=current_user.username)
+			return render_template('main.html', userdata=current_user.username)
 
 
 	def post(self):

@@ -11,12 +11,17 @@ if not current_user.is_authenticated:
 class MarketsView(MethodView):
 	def get(self,exchange,pair,command):
 		if current_user.is_authenticated:
-
+    
 			base_url = "https://api.cryptowat.ch/markets"
 			endpoint = tuple([exchange,pair,command])
 			if command == "ohlc":
-				ohlc = requests.get(base_url +"/%s/%s/%s" % endpoint, params={"after":1514764800,"periods":"300"}).json()
-				return jsonify({"data": ohlc})
+				afterTime = request.args.get("after")
+				if afterTime is not None: #need to fix this and main_olhc.js may be compare unixtimstamps less than incoming do something
+					ohlc = requests.get(base_url +"/%s/%s/%s" % endpoint, params={"after":1514764800,"periods":"300"}).json()
+					return jsonify({"data":ohlc})
+				else:
+					ohlc = requests.get(base_url +"/%s/%s/%s" % endpoint, params={"after":afterTime,"periods":"300"}).json()
+					return jsonify({"data":ohlc})
 			elif command == "price":
 				price = requests.get(base_url +"/%s/%s/%s" % endpoint).json()
 				return jsonify({"data":price})
@@ -28,7 +33,7 @@ class MarketsView(MethodView):
 				return jsonify({"data":orderbook})
 			elif command == "trades":
 				trades = requests.get(base_url +"/%s/%s/%s" % endpoint).json()
-				return jsonify({"data":command})
+				return jsonify({"data":trades})
 			else:
 				return jsonify({"data":"error"})
 		else:
