@@ -1,5 +1,5 @@
 from flask import Blueprint
-from .markets import MarketsView
+from .Markets import MarketsView
 from flask_login import login_user, current_user, login_required, logout_user
 from flask import redirect, render_template, flash, request, url_for, session
 
