@@ -9,32 +9,45 @@ if not current_user.is_authenticated:
 """
 
 class MarketsView(MethodView):
-	def get(self,exchange,pair,command):
+	def __init__(self, *args, **kwargs):
+		self.base_url = "https://api.cryptowat.ch/markets"
+	
+	def ohlc(self,exchange,pair,after):
 		if current_user.is_authenticated:
-    
-			base_url = "https://api.cryptowat.ch/markets"
-			endpoint = tuple([exchange,pair,command])
-			if command == "ohlc":
-				afterTime = request.args.get("after")
-				if afterTime is not None: #need to fix this and main_olhc.js may be compare unixtimstamps less than incoming do something
-					ohlc = requests.get(base_url +"/%s/%s/%s" % endpoint, params={"after":1514764800,"periods":"300"}).json()
-					return jsonify({"data":ohlc})
-				else:
-					ohlc = requests.get(base_url +"/%s/%s/%s" % endpoint, params={"after":afterTime,"periods":"300"}).json()
-					return jsonify({"data":ohlc})
-			elif command == "price":
-				price = requests.get(base_url +"/%s/%s/%s" % endpoint).json()
-				return jsonify({"data":price})
-			elif command == "summary":
-				summary = requests.get(base_url +"/%s/%s/%s" % endpoint).json()
-				return jsonify({"data":summary})
-			elif command == "orderbook":
-				orderbook = requests.get(base_url +"/%s/%s/%s" % endpoint).json()
-				return jsonify({"data":orderbook})
-			elif command == "trades":
-				trades = requests.get(base_url +"/%s/%s/%s" % endpoint).json()
-				return jsonify({"data":trades})
-			else:
-				return jsonify({"data":"error"})
+			endpoint = tuple([exchange,pair])
+			ohlc = requests.get(self.base_url +"/%s/%s/ohlc" % endpoint, 
+								params={"after":after,"periods":"300"}).json()
+			return jsonify({"data":ohlc})
 		else:
-			return redirect("/")
+			return redirect('/')
+
+	def price(self,exchange,pair):
+		if current_user.is_authenticated:
+			price = requests.get(self.base_url +"/%s/%s/price" % endpoint).json()
+			return jsonify({"data":price})
+		else:
+			return redirect('/')
+	
+	def summary(self,exchange,pair):
+		if current_user.is_authenticated:
+			endpoint = tuple([exchange,pair])
+			summary = requests.get(self.base_url +"/%s/%s/summary" % endpoint).json()
+			return jsonify({"data":summary})
+		else:
+			return redirect('/')
+	
+	def orderbook(self,exchange,pair):
+		if current_user.is_authenticated:
+			endpoint = tuple([exchange,pair])
+			orderbook = requests.get(self.base_url +"/%s/%s/orderbook" % endpoint).json()
+			return jsonify({"data":orderbook})
+		else:
+			return redirect('/')
+	
+	def trades(self,exchange,pair):
+		if current_user.is_authenticated:
+			endpoint = tuple([exchange,pair])
+			trades = requests.get(self.base_url +"/%s/%s/trades" % endpoint).json()
+			return jsonify({"data":trades})
+		else:
+			return redirect('/')

@@ -8,9 +8,17 @@ from flask import redirect, render_template, flash, request, url_for, session
 markets_blueprint = Blueprint('markets',__name__)
 markets_view_func = MarketsView.as_view('markets')
 
-markets_blueprint.add_url_rule('/<string:exchange>/<string:pair>/<string:command>',
+markets_blueprint.add_url_rule('/<string:exchange>/<string:pair>',
 							   view_func=markets_view_func, 
-                               methods=['GET',])
+                               methods=['price',
+                                        'summary',
+                                        'orderbook',
+                                        'trades',
+                                        'update'])
+
+markets_blueprint.add_url_rule('/<string:exchange>/<string:pair>/<int:after>',
+							   view_func=markets_view_func, 
+                               methods=['ohlc'])
 
 class Resource:
     def get_blueprint(self):

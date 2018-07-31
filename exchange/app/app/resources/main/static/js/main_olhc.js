@@ -1,10 +1,8 @@
 
 $(document).ready(function(){
-    $.ajax({
-
-        url: '/kraken/btcusd/ohlc',
-        type: 'GET',
-//        contentType: "application/json",
+    $.ajax({ 
+        url: '/gdax/btcusd/1514764800',
+        type: 'ohlc',
         success: function(data) {
             data = data["data"]["result"]["300"]
             var ohlc = [],
@@ -83,13 +81,15 @@ $(document).ready(function(){
                     offset: 0,
                     lineWidth: 2
                 }],
+                xAxis:{
+                    tickInterval: 300 * 1000,
+                },
                 inputEnabled: false,
                 tooltip: {
                     split: true
                 },
                 scrollbar: {
                     liveRedraw: true
-
                 },
                 plotOptions: {
                     candlestick: {
@@ -136,54 +136,47 @@ $(document).ready(function(){
         },
         complete:function(){
             $(".highcharts-credits").hide()
-            setInterval(function () {
-                var chart = $('#main-chart').highcharts();
-                var series = chart.series;
-                var lastTime =series[0].xData.slice(-1)[0];
 
-               
-                $.ajax({
-
-                    url: '/kraken/btcusd/ohlc?after='+lastTime,
-                    type: 'GET',
-                    success: function(data) {
-                        console.log(data)
-                        data = data["data"]["result"]["300"]
-                        var ohlc = []
-                        var volume = []
-                        var dataLength = data.length
-                        
-                        i = 0
-                
-                        for (i; i < dataLength; i += 1) {
-                            ohlc.push([
-                                data[i][0]*1000, // the date
-                                data[i][1], // open
-                                data[i][2], // high
-                                data[i][3], // low
-                                data[i][4] // close
-                            ]);
-                    
-                            volume.push([
-                                data[i][0]*1000, // the date
-                                data[i][5] // the volume
-                            ]);
-                        }
-                        series[0].addPoint(ohlc, true, true);                    
-                        series[1].addPoint(volume, true, true);   
-                    }
-                });
-
-
-
-            }, 1000*2); // five second refresh
         }
     })
 
                 // set up the updating of the chart each second
                 
-                
+    setInterval(function () {
+        var chart = $('#main-chart').highcharts()
+        var series = chart.series
+        var lastTime =Math.floor((new Date()).getTime()/1000)
 
+        $.ajax({
+            url: '/gdax/btcusd/'+lastTime,
+            type: 'ohlc',
+            success: function(data) {
+                data = data["data"]["result"]["300"]
+                var ohlc = [],
+                volume = [],
+                dataLength = data.length,
+                            
+                i = 0;
+                    
+                for (i; i < dataLength; i += 1) {
+                ohlc.push([data[i][0]*1000, // the date
+                           data[i][1], // open
+                           data[i][2], // high
+                           data[i][3], // low
+                           data[i][4] // close
+                          ]);
+                        
+                volume.push([
+                            data[i][0]*1000, // the date
+                            data[i][5] // the volume
+                            ]);
+                series[0].addPoint(ohlc[i], true, true)
+                series[1].addPoint(volume[i], true, true)
+                
+                }
+            }
+        });
+    }, 1000*60);
 
 
 })
