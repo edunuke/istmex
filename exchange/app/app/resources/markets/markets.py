@@ -16,7 +16,7 @@ class MarketsView(MethodView):
 		if current_user.is_authenticated:
 			endpoint = tuple([exchange,pair])
 			ohlc = requests.get(self.base_url +"/%s/%s/ohlc" % endpoint, 
-								params={"after":after,"periods":"300"}).json()
+								params={"after":after,"periods":"60"}).json()
 			return jsonify({"data":ohlc})
 		else:
 			return redirect('/')

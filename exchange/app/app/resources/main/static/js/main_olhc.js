@@ -4,7 +4,7 @@ $(document).ready(function(){
         url: '/gdax/btcusd/1514764800',
         type: 'ohlc',
         success: function(data) {
-            data = data["data"]["result"]["300"]
+            data = data["data"]["result"]["60"]
             var ohlc = [],
             volume = [],
             dataLength = data.length,
@@ -32,30 +32,30 @@ $(document).ready(function(){
 
                 rangeSelector: {    
                     enabled:true,
-                    selected:1,
+                    selected:0,
                     buttons: [{
+                        type: 'minute',
+                        count: 30,
+                        text: '30m',
+                        dataGrouping: {
+                            forced: true,
+                            units: [['minute', [1]]]
+                        }
+                    }, {
                         type: 'hour',
-                        count: 24,
-                        text: '1d',
+                        count: 24*2,
+                        text: '2d',
                         dataGrouping: {
                             forced: true,
                             units: [['hour', [1]]]
                         }
                     }, {
-                        type: 'hour',
-                        count: 24*3,
-                        text: '3d',
+                        type: 'all',
+                        text: 'all',
+                        count: 1,
                         dataGrouping: {
                             forced: true,
-                            units: [['hour', [1]]]
-                        }
-                    }, {
-                        type: 'hour',
-                        text: '1w',
-                        count: 24*7,
-                        dataGrouping: {
-                            forced: true,
-                            units: [['hour', [1]]]
+                            units: [['minute', [1]]]
                         }
                     }],
                 }, 
@@ -81,9 +81,6 @@ $(document).ready(function(){
                     offset: 0,
                     lineWidth: 2
                 }],
-                xAxis:{
-                    tickInterval: 300 * 1000,
-                },
                 inputEnabled: false,
                 tooltip: {
                     split: true
@@ -100,7 +97,8 @@ $(document).ready(function(){
                 responsive: {
                     rules: [{
                         condition: {
-                            maxWidth: 500
+                            maxWidth: 500,
+                            minHeight: 
                         },
                         chartOptions: {
                             chart: {
@@ -110,7 +108,7 @@ $(document).ready(function(){
                                 enabled: false
                             },
                             navigator: {
-                                enabled: true
+                                enabled: false
                             }
                         }
                     }]
@@ -122,14 +120,14 @@ $(document).ready(function(){
                     name: 'BTCUSD',
                     data: ohlc,
                     pointStart: Date.UTC(2018, 1, 1),
-                    pointInterval: 300 * 1000,
+                    pointInterval: 60 * 1000,
                 }, {
                     type: 'column',
                     name: 'Volume',
                     data: volume,
                     yAxis: 1,
                     pointStart: Date.UTC(2018, 1, 1),
-                    pointInterval: 300 * 1000,
+                    pointInterval: 60 * 1000,
 
                 }]
             });
@@ -140,7 +138,7 @@ $(document).ready(function(){
         }
     })
 
-                // set up the updating of the chart each second
+    // set up the updating of the chart once per min
                 
     setInterval(function () {
         var chart = $('#main-chart').highcharts()
@@ -151,7 +149,7 @@ $(document).ready(function(){
             url: '/gdax/btcusd/'+lastTime,
             type: 'ohlc',
             success: function(data) {
-                data = data["data"]["result"]["300"]
+                data = data["data"]["result"]["60"]
                 var ohlc = [],
                 volume = [],
                 dataLength = data.length,
@@ -177,6 +175,10 @@ $(document).ready(function(){
             }
         });
     }, 1000*60);
+
+
+
+
 
 
 })
