@@ -23,6 +23,7 @@ class MarketsView(MethodView):
 
 	def price(self,exchange,pair):
 		if current_user.is_authenticated:
+			endpoint = tuple([exchange,pair])
 			price = requests.get(self.base_url +"/%s/%s/price" % endpoint).json()
 			return jsonify({"data":price})
 		else:

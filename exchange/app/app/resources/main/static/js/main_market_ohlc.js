@@ -61,8 +61,8 @@ $(document).ready(function(){
                 }, 
                 yAxis: [{
                     labels: {
-                        align: 'right',
-                        x: -3
+                        align: 'left',
+                        x: 0
                     },
 
                     height: '60%',
@@ -72,8 +72,8 @@ $(document).ready(function(){
                     }
                 }, {
                     labels: {
-                        align: 'right',
-                        x: -3
+                        align: 'left',
+                        x: 0
                     },
 
                     top: '65%',
@@ -93,25 +93,6 @@ $(document).ready(function(){
                         color: "#EC7063",
                         upColor: "#82E0AA"
                     }
-                },
-                responsive: {
-                    rules: [{
-                        condition: {
-                            maxWidth: 500,
-                            minHeight: 
-                        },
-                        chartOptions: {
-                            chart: {
-                                height: 500
-                            },
-                            rangeSelector: {
-                                enabled: false
-                            },
-                            navigator: {
-                                enabled: false
-                            }
-                        }
-                    }]
                 },
                 exporting: { enabled: false },
                 time: { useUTC: false },
@@ -176,7 +157,7 @@ $(document).ready(function(){
         });
     }, 1000*60);
 
-
+// set up the updating of the chart once per min
 
 
 

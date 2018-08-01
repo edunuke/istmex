@@ -345,27 +345,20 @@
         <div class="container-fluid">
           <div class="animated fadeIn">
             <div class="row">
+
+              <!-- /.col-->
               <div class="col-sm-6 col-lg-3">
                 <div class="card text-white bg-primary">
                   <div class="card-body pb-0">
-                    <div class="btn-group float-right">
-                      <button class="btn btn-transparent dropdown-toggle p-0" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="icon-settings"></i>
-                      </button>
-                      <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                      </div>
-                    </div>
-                    <div class="text-value">9.823</div>
-                    <div>Members online</div>
+                    <div id="lastprice" class="text-value">- - - -</div>
+                    <div>Last Price</div>
                   </div>
                   <div class="chart-wrapper mt-3 mx-3" style="height:70px;">
                     <canvas class="chart" id="card-chart1" height="70"></canvas>
                   </div>
                 </div>
               </div>
+
               <!-- /.col-->
               <div class="col-sm-6 col-lg-3">
                 <div class="card text-white bg-info">
@@ -1345,7 +1338,7 @@
     <script src="{{url_for('main.static', filename='node_modules/@coreui/coreui-plugin-chartjs-custom-tooltips/dist/js/custom-tooltips.min.js')}}"></script>
 
 
-    
+
     <script src="{{url_for('main.static', filename='node_modules/highcharts/highstock.js')}}"></script>
     <script src="{{url_for('main.static', filename='node_modules/highcharts/modules/drag-panes.js')}}"></script>
     <script src="{{url_for('main.static', filename='node_modules/highcharts/modules/exporting.js')}}"></script>
@@ -1353,6 +1346,7 @@
     <!-- Plugins and scripts required by this view-->
 
     <script src="{{url_for('main.static', filename='js/main.js')}}"></script>
-    <script src="{{url_for('main.static', filename='js/main_olhc.js')}}"></script>
+    <script src="{{url_for('main.static', filename='js/main_market_price.js')}}"></script>
+    <script src="{{url_for('main.static', filename='js/main_market_ohlc.js')}}"></script>
   </body>
 </html>
