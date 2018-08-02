@@ -63,39 +63,26 @@ $(document).ready(function(){
                 datapoint = data["data"]["result"]["price"]
                 $('#lastprice').html('<span>'+datapoint+" USD"+'</span>')
 
-                var chart = $('#card-chart1')//.highcharts()
+                if (cardChart1.config.data.datasets[0].data.length == 10) {
+
+                  cardChart1.config.data.datasets[0].data.shift();
+                  cardChart1.config.data.datasets[0].data.push(data["data"]["result"]["price"]);
+                  cardChart1.options.scales.yAxes[0].ticks.suggestedMax =Math.max(cardChart1.config.data.datasets[0].data.shift()) + 0.01
+                  cardChart1.options.scales.yAxes[0].ticks.suggestedMin = Math.min(cardChart1.config.data.datasets[0].data.shift()) - 0.01
+                  cardChart1.update();
+
+                }
                 
-                
-
-                    dataset : [{
-                        label: datapoint,
-                        backgroundColor: getStyle('--info'),
-                        borderColor: 'rgba(255,255,255,.55)',
-                        data: datapoint,
-                    }]
-
-                      //cardChart1.config.data.labels.push("month");
-                      cardChart1.options.scales.yAxes[0].ticks.suggestedMax = parseFloat(datapoint)+.01
-                      cardChart1.options.scales.yAxes[0].ticks.suggestedMin = parseFloat(datapoint)-.01
-                      cardChart1.config.data.datasets.forEach(function(dataset) {
-                      dataset.data.push(data["data"]["result"]["price"]);
-                      });
-
-                      if (cardChart1.config.data.datasets[0].data.length == 10) {
-                        cardChart1.config.data.labels.shift();
-                        cardChart1.config.data.datasets.forEach((dataset) => {
-                        dataset.data.shift();
-                        });    
-                      }
-
-
-                      cardChart1.update();
-
-                    console.log(cardChart1.config.data.datasets)
+                if (cardChart1.config.data.datasets[0].data.length > 2) {
+                  cardChart1.options.scales.yAxes[0].ticks.suggestedMax =Math.max(cardChart1.config.data.datasets[0].data.shift()) + 0.01
+                  cardChart1.options.scales.yAxes[0].ticks.suggestedMin = Math.min(cardChart1.config.data.datasets[0].data.shift()) - 0.01
+                }
+                  cardChart1.config.data.datasets[0].data.push(data["data"]["result"]["price"]);
+                  cardChart1.update();
 
 
             }
         });
         
-    }, 1000*5);
+    }, 1000*60);
 });
