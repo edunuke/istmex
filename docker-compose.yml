@@ -31,11 +31,10 @@ services:
       - "5000"
       - "9001"
       - "5432"
-      - "465"
     ports:
       - "8080:5000"
       - "9003:9001"
-      - "465:465"
+
     networks:
       - dbnet
 
@@ -61,6 +60,32 @@ services:
     environment:
       - MONGO_INITDB_ROOT_USERNAME:root
       - MONGO_INITDB_ROOT_PASSWORD:example
+    networks:
+      - dbnet
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    expose:
+      - "8081"
+    ports:
+      - 8081:8081
+    environment:
+
+      - ME_CONFIG_MONGODB_ADMINUSERNAME:root
+      - ME_CONFIG_MONGODB_ADMINPASSWORD:example
+    networks:
+      - dbnet
+
+
+  market-service:
+    build: marketservice
+    expose:
+      - "8001"
+      - "9001"
+    ports:
+      - "8001:8001"
+      - "9004:9001"
     networks:
       - dbnet
 
