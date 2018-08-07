@@ -73,10 +73,6 @@ $(document).ready(function(){
 
                 }
                 
-                if (cardChart1.config.data.datasets[0].data.length > 2) {
-                  cardChart1.options.scales.yAxes[0].ticks.suggestedMax =Math.max(cardChart1.config.data.datasets[0].data.shift()) + 0.01
-                  cardChart1.options.scales.yAxes[0].ticks.suggestedMin = Math.min(cardChart1.config.data.datasets[0].data.shift()) - 0.01
-                }
                   cardChart1.config.data.datasets[0].data.push(data["data"]["result"]["price"]);
                   cardChart1.update();
 
@@ -84,5 +80,5 @@ $(document).ready(function(){
             }
         });
         
-    }, 1000*60);
+    }, 1000*30);
 });
