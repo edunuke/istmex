@@ -14,7 +14,7 @@ starttime=time.time()
 def orderbook():
     try:
         while True:
-            repeat = 30.0
+            repeat = 15.0
             market_db = client[exchange+"_"+resource+"_db"]
             resource_coll = market_db[resource]
             data = market.fetch(exchange,pair,resource)

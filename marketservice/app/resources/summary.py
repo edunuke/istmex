@@ -12,7 +12,7 @@ starttime=time.time()
 def summary():
     try:
         while True:
-            repeat = 1*3600*24
+            repeat = 1*60*60*24
             market_db = client[exchange+"_"+resource+"_db"]
             resource_coll = market_db[resource]
             data = market.fetch(exchange,pair,resource)

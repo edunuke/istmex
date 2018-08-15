@@ -8,6 +8,7 @@ pair =config["pair"]
 resource = "trades"
 market = MarketResource()
 starttime=time.time()
+
 def trades():
     try:
         while True:
