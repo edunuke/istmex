@@ -1,7 +1,7 @@
 from common.config import config
 from common.mongodb import client
 from common.market import MarketResource
-import time
+import time, datetime
 
 exchange =config["exchange"]
 pair =config["pair"]
@@ -11,26 +11,28 @@ market = MarketResource()
 
 #since jan 1st 2018 only 1514764800
 
-def ohlcHist():
+def Historical():
     try:
         while True:
-            repeat = 1*60*60*24
-            market_db = client[exchange+"_"+resource+"_db"]
-            resource_coll = market_db[resource]
+            repeat = 30.0
+            ytd = datetime.date(datetime.datetime.now().year,1,1)
+            ytd_unix= int(time.mktime(ytd.timetuple()))
+            market_db = client[exchange+"_"+pair]
+            resource_coll = market_db["hist"]
             data = market.fetch(exchange,pair,resource,
-                                after = int(time.time()-repeat),
-                                periods = 60)
+                                after = ytd_unix,
+                                periods = 43200)
             resource_coll.insert_one(data)
             time.sleep(repeat - ((time.time() - starttime) % repeat))
     except KeyboardInterrupt:
         print("process stopped")
 
 
-def updateOhlc():
+def Ohlc():
     try:
         while True:
-            repeat = 15.0
-            market_db = client[exchange+"_"+resource+"_db"]
+            repeat = 30.0
+            market_db = client[exchange+"_"+pair]
             resource_coll = market_db[resource]
             data = market.fetch(exchange,pair,resource,
                                 after = int(time.time()-repeat),

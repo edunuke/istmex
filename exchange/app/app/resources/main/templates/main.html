@@ -12,7 +12,7 @@
     <title>Istmex Exchange</title>
     <!-- Icons-->
     
-
+    
     <script src="https://js.pusher.com/4.2/pusher.min.js"></script>
     <link href="{{url_for('main.static', filename='node_modules/@coreui/icons/css/coreui-icons.min.css')}}" rel="stylesheet">
     <link href="{{url_for('main.static', filename='node_modules/flag-icon-css/css/flag-icon.min.css')}}" rel="stylesheet">
@@ -351,9 +351,9 @@
                 <div class="card text-white bg-primary">
                   <div class="card-body pb-0">
                     <div id="lastprice" class="text-value">- - - -</div>
-                    <div>Last Price</div>
+                    <div id="lastdate">- - - -</div>
                   </div>
-                  <div class="chart-wrapper mt-3 mx-3" style="height:70px;">
+                  <div class="chart-wrapper mt-3" style="height:70px;">
                     <canvas class="chart" id="card-chart1" height="70"></canvas>
                   </div>
                 </div>
@@ -361,16 +361,11 @@
 
               <!-- /.col-->
               <div class="col-sm-6 col-lg-3">
-                <div class="card text-white bg-info">
-                  <div class="card-body pb-0">
-                    <button class="btn btn-transparent p-0 float-right" type="button">
-                      <i class="icon-location-pin"></i>
-                    </button>
-                    <div class="text-value">9.823</div>
-                    <div>Members online</div>
-                  </div>
-                  <div class="chart-wrapper mt-3 mx-3" style="height:70px;">
-                    <canvas class="chart" id="card-chart2" height="70"></canvas>
+                <div class="card text-white" style="background-color:#F2F4F4">
+                  <div class="card-body pb-0" style="text-align:center">
+                      <div id="lastchangepct" class="text-value" style="font-size:22px">- - - -</div>
+                      <div id="lastabsolute" class="text-value" style="font-size:22px">- - - -</div>
+                      <div id="changecaret" class="text-value" style="font-size:24px">- - - -</div>
                   </div>
                 </div>
               </div>
@@ -422,11 +417,15 @@
             </div>
             <!-- /.row-->
             <div class="card">
+              <div class="card-header">
+                  <button id="update-history" class="btn btn-default"><i class="fa fa-refresh" style="font-size:24px"></i></button>
+                  </div>
               <div class="card-body">
-
+                
                 <div class="chart-wrapper" style="height:500px;margin-top:5px;">
                   <div id="main-chart" style="height: 100%; width: 100%; position:relative"></div>
                 </div>
+
               </div>
               <div class="card-footer">
                 <div class="row text-center">
@@ -1334,7 +1333,7 @@
     <script src="{{url_for('main.static', filename='node_modules/pace-progress/pace.min.js')}}"></script>
     <script src="{{url_for('main.static', filename='node_modules/perfect-scrollbar/dist/perfect-scrollbar.min.js')}}"></script>
     <script src="{{url_for('main.static', filename='node_modules/@coreui/coreui/dist/js/coreui.min.js')}}"></script>
-    <script src="{{url_for('main.static', filename='node_modules/chart.js/dist/Chart.min.js')}}"></script>
+    <script src="{{url_for('main.static', filename='node_modules/chart.js/dist/Chart.bundle.min.js')}}"></script>
     <script src="{{url_for('main.static', filename='node_modules/@coreui/coreui-plugin-chartjs-custom-tooltips/dist/js/custom-tooltips.min.js')}}"></script>
 
 
@@ -1346,7 +1345,6 @@
     <!-- Plugins and scripts required by this view-->
 
     <script src="{{url_for('main.static', filename='js/main.js')}}"></script>
-    <script src="{{url_for('main.static', filename='js/main_market_price.js')}}"></script>
     <script src="{{url_for('main.static', filename='js/main_market_summary.js')}}"></script>
     <script src="{{url_for('main.static', filename='js/main_market_ohlc.js')}}"></script>
   </body>

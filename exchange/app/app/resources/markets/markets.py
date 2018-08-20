@@ -2,53 +2,37 @@ from flask import redirect, render_template, flash, request, url_for, session, R
 from flask_login import login_user, current_user, login_required, logout_user
 from flask.views import MethodView
 from flask import jsonify,json
-import requests
-"""
-if not current_user.is_authenticated:
-	redirect("/")
-"""
+from app import mongo
+from bson.json_util import dumps
+
 
 class MarketsView(MethodView):
 	def __init__(self, *args, **kwargs):
 		self.base_url = "https://api.cryptowat.ch/markets"
 	
-	def ohlc(self,exchange,pair,after):
+	def hist(self,exchange,pair):
 		if current_user.is_authenticated:
-			endpoint = tuple([exchange,pair])
-			ohlc = requests.get(self.base_url +"/%s/%s/ohlc" % endpoint, 
-								params={"after":after,"periods":"60"}).json()
-			return jsonify({"data":ohlc})
+			db = mongo[exchange+"_"+pair]
+			coll = db[request.method.lower()]
+			data = coll.find().sort([('_id', -1)]).limit(1)  
+			return dumps({"data":data[0]})
 		else:
 			return redirect('/')
 
 	def price(self,exchange,pair):
 		if current_user.is_authenticated:
-			endpoint = tuple([exchange,pair])
-			price = requests.get(self.base_url +"/%s/%s/price" % endpoint).json()
-			return jsonify({"data":price})
+			db = mongo[exchange+"_"+pair]
+			coll = db[request.method.lower()]
+			data = coll.find().sort([('_id', -1)]).limit(1)  
+			return dumps({"data":data[0]})
 		else:
 			return redirect('/')
-	
+
 	def summary(self,exchange,pair):
 		if current_user.is_authenticated:
-			endpoint = tuple([exchange,pair])
-			summary = requests.get(self.base_url +"/%s/%s/summary" % endpoint).json()
-			return jsonify({"data":summary})
-		else:
-			return redirect('/')
-	
-	def orderbook(self,exchange,pair):
-		if current_user.is_authenticated:
-			endpoint = tuple([exchange,pair])
-			orderbook = requests.get(self.base_url +"/%s/%s/orderbook" % endpoint).json()
-			return jsonify({"data":orderbook})
-		else:
-			return redirect('/')
-	
-	def trades(self,exchange,pair):
-		if current_user.is_authenticated:
-			endpoint = tuple([exchange,pair])
-			trades = requests.get(self.base_url +"/%s/%s/trades" % endpoint).json()
-			return jsonify({"data":trades})
+			db = mongo[exchange+"_"+pair]
+			coll = db[request.method.lower()]
+			data = coll.find().sort([('time', -1)]).limit(10)  
+			return dumps({"data":data})
 		else:
 			return redirect('/')

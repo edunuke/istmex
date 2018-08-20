@@ -12,10 +12,12 @@ starttime=time.time()
 def summary():
     try:
         while True:
-            repeat = 1*60*60*24
-            market_db = client[exchange+"_"+resource+"_db"]
+            repeat = 10.0
+            market_db = client[exchange+"_"+pair]
             resource_coll = market_db[resource]
-            data = market.fetch(exchange,pair,resource)
+            data = {"time":int(time.time()),
+                    "data":market.fetch(exchange,pair,resource)
+                    }
             resource_coll.insert_one(data)
             time.sleep(repeat - ((time.time() - starttime) % repeat))
     except KeyboardInterrupt:

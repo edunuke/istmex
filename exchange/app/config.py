@@ -33,7 +33,6 @@ SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'database','migrations')
 
 
 PERMANENT_SESSION_LIFETIME = timedelta(minutes=30)
-
 # mail server settings
 MAIL_SERVER = 'localhost'
 MAIL_PORT = 25

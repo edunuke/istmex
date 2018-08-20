@@ -10,15 +10,14 @@ markets_view_func = MarketsView.as_view('markets')
 
 markets_blueprint.add_url_rule('/<string:exchange>/<string:pair>',
 							   view_func=markets_view_func, 
-                               methods=['price',
+                               methods=['hist',
+                                        'ohlc',
+                                        'price',
                                         'summary',
                                         'orderbook',
                                         'trades',
                                         'update'])
 
-markets_blueprint.add_url_rule('/<string:exchange>/<string:pair>/<int:after>',
-							   view_func=markets_view_func, 
-                               methods=['ohlc'])
 
 class Resource:
     def get_blueprint(self):

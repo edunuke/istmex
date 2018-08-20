@@ -1,14 +1,15 @@
 
 $(document).ready(function(){
+
     $.ajax({ 
-        url: '/gdax/btcusd/1514764800',
-        type: 'ohlc',
-        success: function(data) {
-            data = data["data"]["result"]["60"]
+        url: '/gdax/btcusd',
+        type: 'hist',
+        success: function(resp) {
+
+            data = JSON.parse(resp)["data"]["result"]["43200"]
             var ohlc = [],
             volume = [],
-            dataLength = data.length,
-            
+            dataLength = data.length
             i = 0;
     
             for (i; i < dataLength; i += 1) {
@@ -34,28 +35,28 @@ $(document).ready(function(){
                     enabled:true,
                     selected:0,
                     buttons: [{
-                        type: 'minute',
-                        count: 30,
-                        text: '30m',
+                        type: 'week',
+                        count: 1*2,
+                        text: '1w',
                         dataGrouping: {
                             forced: true,
-                            units: [['minute', [1]]]
+                            units: [['day', [1]]]
                         }
                     }, {
-                        type: 'hour',
-                        count: 24*2,
-                        text: '2d',
+                        type: 'month',
+                        count: 1*3,
+                        text: '3m',
                         dataGrouping: {
                             forced: true,
-                            units: [['hour', [1]]]
+                            units: [['week', [1]]]
                         }
                     }, {
                         type: 'all',
-                        text: 'all',
+                        text: 'ytd',
                         count: 1,
                         dataGrouping: {
                             forced: true,
-                            units: [['minute', [1]]]
+                            units: [['day', [1]]]
                         }
                     }],
                 }, 
@@ -94,21 +95,20 @@ $(document).ready(function(){
                         upColor: "#82E0AA"
                     }
                 },
-                exporting: { enabled: false },
                 time: { useUTC: false },
                 series: [{
                     type: 'candlestick',
                     name: 'BTCUSD',
                     data: ohlc,
-                    pointStart: Date.UTC(2018, 1, 1),
-                    pointInterval: 60 * 1000,
+                    //pointStart: Date.UTC(2018, 1, 1),
+                    //pointInterval: 60 * 1000,
                 }, {
                     type: 'column',
                     name: 'Volume',
                     data: volume,
                     yAxis: 1,
-                    pointStart: Date.UTC(2018, 1, 1),
-                    pointInterval: 60 * 1000,
+                    //pointStart: Date.UTC(2018, 1, 1),
+                    //pointInterval: 60 * 1000,
 
                 }]
             });
@@ -120,20 +120,21 @@ $(document).ready(function(){
     })
 
     // set up the updating of the chart once per min
-                
-    setInterval(function () {
-        var chart = $('#main-chart').highcharts()
-        var series = chart.series
-        var lastTime =Math.floor((new Date()).getTime()/1000)
+    $("#update-history").on("click", function(e){
+        e.preventDefault()
 
         $.ajax({
-            url: '/gdax/btcusd/'+lastTime,
-            type: 'ohlc',
-            success: function(data) {
-                data = data["data"]["result"]["60"]
-                var ohlc = [],
-                volume = [],
-                dataLength = data.length,
+            url: '/gdax/btcusd',
+            type: 'hist',
+            beforeSend:function(){
+                $("#update-history i").addClass("fa-spin")
+            },
+            success: function(resp) {
+                chart = $('#main-chart').highcharts()
+                var data = JSON.parse(resp)["data"]["result"]["43200"]
+                var ohlc = []
+                var volume = []
+                var dataLength = data.length,
                             
                 i = 0;
                     
@@ -144,18 +145,41 @@ $(document).ready(function(){
                            data[i][3], // low
                            data[i][4] // close
                           ]);
-                        
+                
                 volume.push([
                             data[i][0]*1000, // the date
                             data[i][5] // the volume
                             ]);
-                series[0].addPoint(ohlc[i], true, true)
-                series[1].addPoint(volume[i], true, true)
                 
                 }
+
+                new_serie = [{
+                    type: 'candlestick',
+                    name: 'BTCUSD',
+                    data: ohlc,
+                }, {
+                    type: 'column',
+                    name: 'Volume',
+                    data: volume,
+
+
+                }]
+
+                chart.update({
+                    series:new_serie
+                })
+
+            },
+            complete: function(){
+                setTimeout(function(){
+                    $("#update-history i").removeClass("fa-spin")
+                }, 2000);
+                
             }
         });
-    }, 1000*60);
+    })
+
+
 
 // set up the updating of the chart once per min
 

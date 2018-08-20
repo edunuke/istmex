@@ -15,7 +15,7 @@ def orderbook():
     try:
         while True:
             repeat = 15.0
-            market_db = client[exchange+"_"+resource+"_db"]
+            market_db = client[exchange+"_"+pair]
             resource_coll = market_db[resource]
             data = market.fetch(exchange,pair,resource)
             resource_coll.insert_one(data)

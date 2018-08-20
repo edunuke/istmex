@@ -14,6 +14,8 @@ Flask-sqlalchemy
 Flask-WTF
 flask-socketio
 
+# mongodb
+pymongo
 
 #other libs
 passlib==1.7.1

@@ -5,15 +5,15 @@ from flask_debugtoolbar import DebugToolbarExtension
 from app.packages.auth import authorized
 from flask_wtf.csrf import CSRFProtect
 from flask_socketio import SocketIO
+from pymongo import MongoClient
 import threading
 #from flasgger import Swagger
-
 
 
 app = Flask(__name__)
 app.config.from_object('config')
 
-
+mongo = MongoClient('mongodb://mongo:27017/')
 db = SQLAlchemy(app)
 lm = LoginManager(app)
 csrf = CSRFProtect(app)
