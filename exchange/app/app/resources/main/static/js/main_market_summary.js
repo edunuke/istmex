@@ -29,7 +29,7 @@ $(document).ready(function(){
 
 
                 }
-            $('#lastprice').html('<span>'+lastPrice[0] +" USD"+'</span>')
+            $('#lastprice').html('<span> 1 BTC = '+lastPrice[0] +" USD"+'</span>')
             $('#lastdate').html('<span>'+"Last Price: "+
                                 timesteps[0].getHours()+":"+
                                 timesteps[0].getMinutes()+":"+
@@ -37,8 +37,8 @@ $(document).ready(function(){
 
             if (changepct[0] < 0) {
               $("#changecaret").html('<i class="fa fa-arrow-down fa-3x" style="color:red">')
-              $("#lastchangepct").html('<span id="uppct" style="color:red">'+'- '+Math.round((changepct[0] + 0.00001) * 10000) / 10000+' %'+'</span>')
-              $("#lastabsolute").html('<span id="upabs" style="color:red">'+'- '+Math.round((changeabs[0] + 0.00001) * 10000) / 10000+' USD'+'</span>')
+              $("#lastchangepct").html('<span id="uppct" style="color:red">'+Math.round((changepct[0] + 0.00001) * 10000) / 10000+' %'+'</span>')
+              $("#lastabsolute").html('<span id="upabs" style="color:red">'+Math.round((changeabs[0] + 0.00001) * 10000) / 10000+' USD'+'</span>')
             } else {
               $("#changecaret").html('<i class="fa fa-arrow-up fa-3x" style="color:green"></i>')
               $("#lastchangepct").html('<span id="uppct" style="color:green">'+'+ '+Math.round((changepct[0] + 0.00001) * 10000) / 10000+' %'+'</span>')
@@ -125,7 +125,7 @@ $(document).ready(function(){
 
               }
 
-          $('#lastprice').html('<span>'+lastPrice[0] +" USD"+'</span>')
+          $('#lastprice').html('<span> 1 BTC = '+lastPrice[0] +" USD"+'</span>')
           $('#lastdate').html('<span>'+"Last Price: "+
                               timesteps[0].getHours()+":"+
                               timesteps[0].getMinutes()+":"+
@@ -133,8 +133,8 @@ $(document).ready(function(){
           
         if (changepct[0] < 0) {
           $("#changecaret").html('<i class="fa fa-arrow-down fa-3x" style="color:red"></i>')
-          $("#lastchangepct").html('<span id="uppct" style="color:red">'+'- '+Math.round((changepct[0] + 0.00001) * 10000) / 10000+' %'+'</span>')
-          $("#lastabsolute").html('<span id="upabs" style="color:red">'+'- '+Math.round((changeabs[0] + 0.00001) * 10000) / 10000+' USD'+'</span>')
+          $("#lastchangepct").html('<span id="uppct" style="color:red">'+Math.round((changepct[0] + 0.00001) * 10000) / 10000+' %'+'</span>')
+          $("#lastabsolute").html('<span id="upabs" style="color:red">'+Math.round((changeabs[0] + 0.00001) * 10000) / 10000+' USD'+'</span>')
           
         } else {
           $("#changecaret").html('<i class="fa fa-arrow-up fa-3x" style="color:green"></i>')

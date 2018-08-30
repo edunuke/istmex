@@ -33,7 +33,7 @@ $(document).ready(function(){
 
                 rangeSelector: {    
                     enabled:true,
-                    selected:0,
+                    selected:1,
                     buttons: [{
                         type: 'week',
                         count: 1*2,
@@ -48,7 +48,7 @@ $(document).ready(function(){
                         text: '3m',
                         dataGrouping: {
                             forced: true,
-                            units: [['week', [1]]]
+                            units: [['day', [1]]]
                         }
                     }, {
                         type: 'all',

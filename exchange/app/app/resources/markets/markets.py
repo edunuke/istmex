@@ -19,20 +19,11 @@ class MarketsView(MethodView):
 		else:
 			return redirect('/')
 
-	def price(self,exchange,pair):
-		if current_user.is_authenticated:
-			db = mongo[exchange+"_"+pair]
-			coll = db[request.method.lower()]
-			data = coll.find().sort([('_id', -1)]).limit(1)  
-			return dumps({"data":data[0]})
-		else:
-			return redirect('/')
-
 	def summary(self,exchange,pair):
 		if current_user.is_authenticated:
 			db = mongo[exchange+"_"+pair]
 			coll = db[request.method.lower()]
-			data = coll.find().sort([('time', -1)]).limit(10)  
+			data = coll.find().sort([('time', -1)]).limit(24)  
 			return dumps({"data":data})
 		else:
 			return redirect('/')
