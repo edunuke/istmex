@@ -6,7 +6,7 @@ Chart.defaults.global.tooltips.position = 'nearest';
 Chart.defaults.global.tooltips.custom = CustomTooltips; // eslint-disable-next-line no-unused-vars
 
 
-var cardChart3 = new Chart($('#card-chart3'), {
+var cardChart2 = new Chart($('#card-chart2'), {
   type: 'line',
   data: {
     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],

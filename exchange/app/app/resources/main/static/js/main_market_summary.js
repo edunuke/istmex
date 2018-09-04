@@ -63,37 +63,28 @@ $(document).ready(function(){
                   },
                   scales: {
                     xAxes: [{
-                      type:'time',
-                      distribution: "series",
-                      gridLines: {
-                        color: 'transparent',
-                        zeroLineColor: 'transparent'
-                      },
-                      ticks: {
-                        fontSize: 2,
-                        fontColor: 'transparent'
-                      }
+                      display: false
                     }],
                     yAxes: [{
                       display: false,
                       ticks: {
-                        suggestedMax: Math.max.apply(Math, lastPrice) + 0.01, 
+                        max: Math.max.apply(Math, lastPrice) + 0.1, 
                         display: false,
                       }
                     }]
                   },
                   elements: {
                     line: {
-                      tension: 0.00001,
-                      borderWidth: 1
+                      borderWidth: 2
                     },
                     point: {
-                      radius: 4,
+                      radius: 3,
                       hitRadius: 10,
                       hoverRadius: 4
                     }
                   }
-                }
+                },
+
               });    
         }
     });
